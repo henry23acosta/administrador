@@ -77,7 +77,7 @@ if (empty($existe) && $id_user != 1) {
                          <td><?php echo $data['nombre']; ?></td>
                          <td><?php echo $data['costo']; ?></td>
                          <td><?php echo $data['talla']; ?></td>
-                         <td><img src="<?php echo $data['imagen']; ?>" alt="" width="20px" height="20px"></td>
+                         <td><img src="<?php echo $data['urlimg']; ?>" alt="" width="20px" height="20px"></td>
                          <td><?php echo $data['stock']; ?></td>
                          <td><?php echo $estado ?></td>
                          <td>
