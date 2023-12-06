@@ -92,6 +92,7 @@ if (!empty($_POST)) {
                 <th>Nombre</th>
                 <th>Correo</th>
                 <th>Estado</th>
+                <th>Imagen</th>
                 <th></th>
             </tr>
         </thead>
@@ -116,6 +117,7 @@ if (!empty($_POST)) {
                         <td><?php echo $data['user']; ?></td>
                         <td><?php echo $data['nombre']; ?></td>
                         <td><?php echo $data['correo']; ?></td>
+                        <td><img src="<?php echo $data['imagen']; ?>" alt="" width="20px" height="20px"></td>
                         <td><?php echo $estado; ?></td>
                         <td>
                             <?php if ($data['Estado'] == 1) { ?>

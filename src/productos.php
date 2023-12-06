@@ -50,49 +50,58 @@ if (empty($existe) && $id_user != 1) {
                  <th>Talla</th>
                  <th>Imagen</th>
                  <th>Stock</th>
+                 <th>Fecha_Emision</th>
+                <th>Fecha Actualizacion</th>
                  <th>Estado</th>
                  <th></th>
              </tr>
          </thead>
          <tbody>
-             <?php
-                include "../conexion.php";
+    <?php
+    include "../conexion.php";
 
-                if($idnegocio != 1){
-                    $query = mysqli_query($conexion, "SELECT * FROM productos WHERE id_negocio = $idnegocio");
-                }else{
-                    $query = mysqli_query($conexion, "SELECT * FROM productos");
-                }
-                $result = mysqli_num_rows($query);
-                if ($result > 0) {
-                    while ($data = mysqli_fetch_assoc($query)) {
-                        if ($data['estado'] == 1) {
-                            $estado = '<span class="badge badge-pill badge-success">Activo</span>';
-                        } else {
-                            $estado = '<span class="badge badge-pill badge-danger">Inactivo</span>';
-                        }
-                ?>
-                     <tr>
-                         <td><?php echo $data['idProductos']; ?></td>
-                         <td><?php echo $data['nombre']; ?></td>
-                         <td><?php echo $data['costo']; ?></td>
-                         <td><?php echo $data['talla']; ?></td>
-                         <td><img src="<?php echo $data['urlimg']; ?>" alt="" width="20px" height="20px"></td>
-                         <td><?php echo $data['stock']; ?></td>
-                         <td><?php echo $estado ?></td>
-                         <td>
-                             <?php if ($data['estado'] == 1) { ?>
-                                 <a href="editar_producto.php?id=<?php echo $data['idProductos']; ?>" class="btn btn-success"><i class='fas fa-edit'></i></a>
+    if ($idnegocio != 1) {
+        $query = mysqli_query($conexion, "SELECT p.*, i.urlimg FROM productos p
+                                          INNER JOIN productos_has_imagen phi ON p.idProductos = phi.idProductos
+                                          INNER JOIN imagen i ON i.idimagen = phi.idimagen
+                                          WHERE p.id_negocio = $idnegocio");
+    } else {
+        $query = mysqli_query($conexion, "SELECT p.*, i.urlimg FROM productos p
+                                          INNER JOIN productos_has_imagen phi ON p.idProductos = phi.idProductos
+                                          INNER JOIN imagen i ON i.idimagen = phi.idimagen");
+    }
+    $result = mysqli_num_rows($query);
+    if ($result > 0) {
+        while ($data = mysqli_fetch_assoc($query)) {
+            if ($data['estado'] == 1) {
+                $estado = '<span class="badge badge-pill badge-success">Activo</span>';
+            } else {
+                $estado = '<span class="badge badge-pill badge-danger">Inactivo</span>';
+            }
+            ?>
+            <tr>
+                <td><?php echo $data['idProductos']; ?></td>
+                <td><?php echo $data['nombre']; ?></td>
+                <td><?php echo $data['costo']; ?></td>
+                <td><?php echo $data['talla']; ?></td>
+                <td><img src="https://www.appopular.me<?php echo $data['urlimg']; ?>" alt="" width="20px" height="20px"></td>
+                <td><?php echo $data['stock']; ?></td>
+                <td><?php echo $data['fecha_emision']; ?></td>
+                <td><?php echo $data['fecha_update']; ?></td>
+                <td><?php echo $estado ?></td>
+                <td>
+                    <?php if ($data['estado'] == 1) { ?>
+                        <a href="editar_producto.php?id=<?php echo $data['idProductos']; ?>" class="btn btn-success"><i class='fas fa-edit'></i></a>
 
-                                 <form action="eliminar_producto.php?id=<?php echo $data['idProductos']; ?>" method="post" class="confirmar d-inline">
-                                     <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
-                                 </form>
-                             <?php } ?>
-                         </td>
-                     </tr>
-             <?php }
-                } ?>
-         </tbody>
+                        <form action="eliminar_producto.php?id=<?php echo $data['idProductos']; ?>" method="post" class="confirmar d-inline">
+                            <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
+                        </form>
+                    <?php } ?>
+                </td>
+            </tr>
+    <?php }
+    } ?>
+</tbody>
 
      </table>
  </div>

@@ -96,6 +96,8 @@ if (!empty($_POST)) {
                 <th>#</th>
                 <th>Nombre</th>
                 <th>Descripcion</th>
+                <th>Fecha emision</th>
+                <th>Fecha Actualizacion</th>
                 <th>Estado</th>
                 <th></th>
             </tr>
@@ -124,6 +126,9 @@ if (!empty($_POST)) {
                         <td><?php echo $data['idCategoria']; ?></td>
                         <td><?php echo $data['Nombre']; ?></td>
                         <td><?php echo $data['Descripcion']; ?></td>
+                        <td><?php echo $data['fecha_emision']; ?></td>
+                        <td><?php echo $data['fecha_update']; ?></td>
+                        
                         <td><?php echo $estado; ?></td>
                         <td>
                             <?php if ($data['estado'] == 1) { ?>

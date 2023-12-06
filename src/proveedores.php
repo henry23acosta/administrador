@@ -50,6 +50,8 @@ if (empty($existe) && $id_user != 1) {
                  <th>Identificacion</th>
                  <th>Nombre</th>
                  <th>Telefono</th>
+                 <th>Fecha_Emision</th>
+                 <th>Fecha Actualizacion</th>
                  <th>Estado</th>
                  <th></th>
              </tr>
@@ -79,7 +81,8 @@ if (empty($existe) && $id_user != 1) {
                         <td><?php echo $data['identificacion']; ?></td>
                         <td><?php echo $data['nombre']; ?></td>
                         <td><?php echo $data['telefono']; ?></td>
-
+                        <td><?php echo $data['fecha_emision']; ?></td>
+                        <td><?php echo $data['fecha_update']; ?></td>
                         <td><?php echo $estado ?></td>
                          <td>
                              <?php if ($data['estado'] == 1) { ?>

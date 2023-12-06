@@ -21,7 +21,6 @@ $query = mysqli_query($conexion, "SELECT f.idFactura,f.total,f.fecha_emision,f.u
             <th>Cliente</th>
             <th>Total</th>
             <th>Fecha</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -31,9 +30,7 @@ $query = mysqli_query($conexion, "SELECT f.idFactura,f.total,f.fecha_emision,f.u
                 <td><?php echo $row['nombre']; ?></td>
                 <td><?php echo $row['total']; ?></td>
                 <td><?php echo $row['fecha_emision']; ?></td>
-                <td>
-                    <a href="pdf/generar.php?cl=<?php echo $row['id_cliente'] ?>&v=<?php echo $row['id'] ?>" target="_blank" class="btn btn-danger"><i class="fas fa-file-pdf"></i></a>
-                </td>
+          
             </tr>
         <?php } ?>
     </tbody>
