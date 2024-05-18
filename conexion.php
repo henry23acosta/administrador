@@ -2,7 +2,7 @@
    $host = "localhost";
    $user = "node";
    $clave = "Node_2023";
-   $bd = "appopu2023";
+   $bd = "appopular";
 /*$servername = "localhost";
 $username = "node";
 $password = "Node_2023";
