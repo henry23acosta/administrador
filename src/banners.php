@@ -17,10 +17,16 @@ function subirImagen($imagen) {
 }
 
 // Código de conexión a la base de datos y función subirImagen
-$database = "appopu2023";
+$database = "appopular";
 $servername = "localhost";
-$username = "root";
+$username = "Node_2023";
 $password = "root";
+
+/*$host = "localhost";
+$user = "node";
+$clave = "Node_2023";
+$bd = "appopular";*/
+
 
 // Conexión a la base de datos
 $conn = new mysqli($servername, $username, $password, $database);
