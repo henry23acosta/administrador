@@ -34,7 +34,7 @@ if (empty($_SESSION['active'])) {
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="salir.php">Cerrar Sessión</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="banners.php">Noticias Nuevas</a>
+                    <a class="dropdown-item" href="banners.php">Promociones Nuevas</a>
                 </div>
             </li>
         </ul>

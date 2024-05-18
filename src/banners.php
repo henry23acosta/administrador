@@ -1,19 +1,44 @@
-<?php
-include_once "includes/header.php";
+<?php include_once "includes/header.php";
 include "../conexion.php";
 
+$conn = $conexion;
 $id_user = $_SESSION['idUser'];
-$permiso = "Categorias";
+$permiso = "Banners";
 $idnegocio = $_SESSION['idnegocio'];
 $sql = mysqli_query($conexion, "SELECT dp.Id_rol,dp.idusuario,p.idpermisos,p.nombre FROM detalle_permiso dp INNER JOIN permisos p WHERE dp.idusuario = '$id_user' AND dp.idpermisos = p.idpermisos AND p.nombre = '$permiso';");
 $existe = mysqli_fetch_all($sql);
 if (empty($existe) && $id_user != 1) {
     header("Status: 301 Moved Permanently");
     header("Location: permisos.php");
-    echo "<script language='javascript'>window.location='permisos.php'</script>;";
+    echo"<script language='javascript'>window.location='permisos.php'</script>;";
     exit();
 }
-
+if (!empty($_POST)) {
+    $alert = "";
+    if (empty($_POST['Nombre']) || empty($_POST['Descripcion']) || empty($_POST['id_negocio'])) {
+        $alert = '<div class="alert alert-danger" role="alert">
+        Todo los campos son obligatorios
+        </div>';
+    } else {
+        $Nombre = $_POST['Nombre'];
+        $Descripcion = $_POST['Descripcion'];
+        $id_negocio = $_POST['id_negocio'];
+        
+        $query_insert = mysqli_query($conexion, "INSERT INTO categoria(Nombre,Descripcion,id_negocio) values ('$Nombre','$Descripcion', $id_negocio)");
+        if ($query_insert) {
+            $alert = '<div class="alert alert-primary" role="alert">
+                        Usuario registrado
+                    </div>';
+            header("Location: categoria.php");
+            echo"<script language='javascript'>window.location='categoria.php'</script>;";
+            exit();
+        } else {
+            $alert = '<div class="alert alert-danger" role="alert">
+                    Error al registrar
+                </div>';
+        }
+    }
+}
 // Función para subir imagen (tomada del primer archivo)
 function subirImagen($imagen) {
     $tipo_mime = mime_content_type($imagen["tmp_name"]); // Obtener tipo MIME
@@ -25,32 +50,6 @@ function subirImagen($imagen) {
     } else {
         // Tipo de archivo no permitido
         return false;
-    }
-}
-
-if (!empty($_POST)) {
-    $alert = "";
-    if (empty($_POST['Nombre']) || empty($_POST['Descripcion']) || empty($_POST['id_negocio'])) {
-        $alert = '<div class="alert alert-danger" role="alert">
-        Todos los campos son obligatorios
-        </div>';
-    } else {
-        $Nombre = $_POST['Nombre'];
-        $Descripcion = $_POST['Descripcion'];
-        $id_negocio = $_POST['id_negocio'];
-
-        // Insertar en la base de datos
-        $query_insert = mysqli_query($conexion, "INSERT INTO categoria(Nombre, Descripcion, id_negocio) VALUES ('$Nombre','$Descripcion',$id_negocio)");
-
-        if ($query_insert) {
-            $alert = '<div class="alert alert-primary" role="alert">
-                        Categoría registrada exitosamente
-                    </div>';
-        } else {
-            $alert = '<div class="alert alert-danger" role="alert">
-                    Error al registrar la categoría
-                </div>';
-        }
     }
 }
 
@@ -113,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $sql = "SELECT id_banner, imagenes, tipo_mime, fechacreacion FROM banners";
 $result = $conn->query($sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -183,4 +183,5 @@ $result = $conn->query($sql);
     ?>
 </body>
 </html>
+
 <?php include_once "includes/footer.php"; ?>

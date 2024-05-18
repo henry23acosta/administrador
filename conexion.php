@@ -2,9 +2,13 @@
    $host = "localhost";
    $user = "node";
    $clave = "Node_2023";
-   $bd = "appopular";
-
-    $conexion = mysqli_connect($host,$user,$clave,$bd);
+   $bd = "appopu2023";
+/*$servername = "localhost";
+$username = "node";
+$password = "Node_2023";
+$dbname = "appopular";*/
+   $conexion = mysqli_connect($host,$user,$clave,$bd);
+   
     if (mysqli_connect_errno()){
         echo "No se pudo conectar a la base de datos";
         exit();
