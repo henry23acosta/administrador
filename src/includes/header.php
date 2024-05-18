@@ -33,6 +33,8 @@ if (empty($_SESSION['active'])) {
                     <a class="dropdown-item" data-toggle="modal" data-target="#nuevo_pass">Actualizar Contraseña</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="salir.php">Cerrar Sessión</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="banners.php">Noticias Nuevas</a>
                 </div>
             </li>
         </ul>
