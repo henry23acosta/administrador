@@ -5,6 +5,7 @@ $username = "node";
 $password = "Node_2023";
 $dbname = "appopular";
 
+
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 

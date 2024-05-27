@@ -9,11 +9,6 @@ $username = "root";
 $password = "root";
 $dbname = "appopu2023";*/
 
-/*$host = "localhost";
-$user = "node";
-$clave = "Node_2023";
-$bd = "appopular";*/
-
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

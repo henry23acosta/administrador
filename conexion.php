@@ -3,10 +3,16 @@
    $user = "node";
    $clave = "Node_2023";
    $bd = "appopular";
+
 /*$servername = "localhost";
 $username = "node";
 $password = "Node_2023";
 $dbname = "appopular";*/
+
+/*$host = "localhost";
+$user = "root";
+$clave = "root";
+$bd = "appopu2023";*/
    $conexion = mysqli_connect($host,$user,$clave,$bd);
    
     if (mysqli_connect_errno()){
