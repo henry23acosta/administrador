@@ -1,9 +1,9 @@
 <?php
 // Datos de conexión a la base de datos
 $servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "appopu2023";
+$username = "node";
+$password = "Node_2023";
+$dbname = "appopular";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);

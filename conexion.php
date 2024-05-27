@@ -1,8 +1,8 @@
 <?php
    $host = "localhost";
-   $user = "root";
-   $clave = "root";
-   $bd = "appopu2023";
+   $user = "node";
+   $clave = "Node_2023";
+   $bd = "appopular";
 /*$servername = "localhost";
 $username = "node";
 $password = "Node_2023";

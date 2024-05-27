@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "appopu2023";
+$username = "node";
+$password = "Node_2023";
+$dbname = "appopular";
 
 /*$servername = "localhost";
 $username = "root";
