@@ -1,8 +1,8 @@
 <?php
    $host = "localhost";
-   $user = "node";
-   $clave = "Node_2023";
-   $bd = "appopular";
+   $user = "root";
+   $clave = "root";
+   $bd = "appopu2023";
 /*$servername = "localhost";
 $username = "node";
 $password = "Node_2023";
@@ -16,4 +16,3 @@ $dbname = "appopular";*/
     mysqli_select_db($conexion,$bd) or die("No se encuentra la base de datos");
     mysqli_set_charset($conexion,"utf8");
 ?>
-

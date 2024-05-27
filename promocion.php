@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
-$username = "node";
-$password = "Node_2023";
-$dbname = "appopular";
+$username = "root";
+$password = "root";
+$dbname = "appopu2023";
 
 /*$servername = "localhost";
 $username = "root";
@@ -40,6 +40,44 @@ try {
 } catch (mysqli_sql_exception $e) {
     echo "Error en la consulta: " . $e->getMessage();
 }
+$sql = "
+    SELECT 
+        p.idProductos, 
+        p.nombre, 
+        p.costo, 
+        p.talla, 
+        p.stock, 
+        GROUP_CONCAT(i.urlimg) as urlimg, 
+        SUM(cd.cantidad) as total_ventas
+    FROM 
+        productos p
+    JOIN 
+        productos_has_imagen phi ON p.idProductos = phi.idProductos
+    JOIN 
+        imagen i ON phi.idimagen = i.idimagen
+    JOIN 
+        compra_detalle cd ON p.idProductos = cd.idProductos
+    GROUP BY 
+        p.idProductos, p.nombre, p.costo, p.talla, p.stock
+    ORDER BY 
+        total_ventas DESC
+    LIMIT 3
+";
+$result = $conn->query($sql);
+
+// Organizar los resultados en un array
+$productos = [];
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $productos[$row['idProductos']]['nombre'] = $row['nombre'];
+        $productos[$row['idProductos']]['costo'] = $row['costo'];
+        $productos[$row['idProductos']]['talla'] = $row['talla'];
+        $productos[$row['idProductos']]['stock'] = $row['stock'];
+        $productos[$row['idProductos']]['total_ventas'] = $row['total_ventas'];
+        // Separar las URLs concatenadas en un array
+        $productos[$row['idProductos']]['imagenes'] = explode(',', $row['urlimg']);
+    }
+}
 
 $conn->close();
 ?>
@@ -49,7 +87,6 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promociones del Centro Comercial Popular</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         .title-bar {
@@ -57,87 +94,78 @@ $conn->close();
             color: white;
             padding: 10px 0;
             text-align: center;
-            overflow: hidden; /* Para evitar que el texto se desborde */
-            position: relative; /* Para que la animación sea relativa a este contenedor */
         }
-        
-        .title-text {
-            transition: background-color 0.5s, color 0.5s; /* Transición suave del color de fondo y del color del texto */
-            background-color: black; /* Color de fondo inicial */
-            color: white; /* Color de texto inicial */
-            padding: 5px 10px; /* Espaciado alrededor del texto */
-            border-radius: 5px; /* Bordes redondeados */
+        .navbar {
+            background-color: #333;
         }
-        /* Definición de la animación */
-        /*@keyframes scrollText {
-            0% {
-                transform: translateX(0%);
-            }
-            100% {
-                transform: translateX(100%);
-            }
-        }*/
-        
-        /* Ajusta el ancho de la imagen del carrusel */
+        .navbar-nav .nav-link {
+            color: white !important;
+        }
         .carousel-item img {
+            width: 100px;
+            height: 400px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+        }
+        .product-card img {
             width: 100%;
             height: auto;
         }
-
-        /* Estilo personalizado para el carrusel */
-        .carousel-item {
-            transition: transform 1s ease; /* Transición suave */
-        }
-        
-        /* Agrega una clase activa personalizada al carrusel */
-        .carousel-item.active {
-            transform: translateX(0%);
-        }
-        
-        .carousel-item.next {
-            transform: translateX(100%);
-        }
-        
-        .carousel-item.prev {
-            transform: translateX(-100%);
-        }
-        
-        .carousel-item-right.active,
-        .carousel-item-left.active {
-            transform: translateX(0);
-        }
-        
-        .carousel-item-right,
-        .carousel-item-left {
-            transform: translateX(0);
-        }
-        
-        .carousel-item-next,
-        .carousel-item-prev {
-            position: relative;
-            transform: translateX(0);
-        }
-        
-        /* Agrega la transición al elemento activo */
-        .carousel-inner .carousel-item-right.active,
-        .carousel-inner .carousel-item-left.active {
-            transition: transform 1s ease;
-        }
-        
-        /* Agrega la transición a los elementos prev y next */
-        .carousel-inner .carousel-item-next,
-        .carousel-inner .carousel-item-prev,
-        .carousel-inner .carousel-item-right,
-        .carousel-inner .carousel-item-left {
-            transition: transform 1s ease;
+        .social-links a {
+            margin: 0 10px;
+            color: #333;
+            font-size: 1.5em;
         }
     </style>
 </head>
 <body>
 
 <div class="title-bar">
-    <h1 class="title-text">Promociones del Centro Comercial Popular</h1>
+    <h1> Centro Comercial Popular de Tulcán</h1>
 </div>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="/administrador/promocion.php">Inicio</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+        
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="tiendasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tiendas
+                </a>
+                <div class="dropdown-menu" aria-labelledby="tiendasDropdown">
+                    <a class="dropdown-item" href="/administrador/product_index.php">Lista de Productos</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="tiendasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Aplicación
+                </a>
+                <div class="dropdown-menu" aria-labelledby="tiendasDropdown">
+                    <a class="dropdown-item" href="#">Descargar</a>
+                    <a class="dropdown-item" href="#">Administrador</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+    </div>
+</nav>
+
 
 <div class="container mt-5">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -166,13 +194,58 @@ $conn->close();
             <span class="sr-only">Next</span>
         </a>
     </div>
+
+
+
+    <div class="container mt-5">
+        <h2>Productos Más Vendidos</h2>
+        <div class="row">
+            <?php if (!empty($productos)): ?>
+                <?php foreach ($productos as $idProducto => $producto): ?>
+                    <div class="col-md-4">
+                        <div class="product-card">
+                            <?php if (!empty($producto['imagenes'])): ?>
+                                <?php foreach ($producto['imagenes'] as $imagen): ?>
+                                    <img src="<?php echo htmlspecialchars($imagen); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                                    <!-- Mostramos solo la primera imagen -->
+                                    <?php break; ?>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                            <h5><?php echo htmlspecialchars($producto['nombre']); ?></h5>
+                            <p>Costo: <?php echo htmlspecialchars($producto['costo']); ?></p>
+                            <p>Talla: <?php echo htmlspecialchars($producto['talla']); ?></p>
+                            <p>Stock: <?php echo htmlspecialchars($producto['stock']); ?></p>
+                            <p>Total Ventas: <?php echo htmlspecialchars($producto['total_ventas']); ?></p>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No se encontraron productos.</p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    
+
+
+    
+
+    <div class="mt-5 text-center">
+        <h2>Síguenos en nuestras redes sociales</h2>
+        <script src="https://kit.fontawesome.com/c732077a9d.js" crossorigin="anonymous"></script>
+        <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=100076249756368&mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.whatsapp.com" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://www.tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
-    // Cambiar la imagen del carrusel cada 3 segundos
     $(document).ready(function(){
         $('#carouselExampleIndicators').carousel({
             interval: 2000
@@ -181,4 +254,3 @@ $conn->close();
 </script>
 </body>
 </html>
-
