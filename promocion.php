@@ -138,7 +138,7 @@ $conn->close();
                     Tiendas
                 </a>
                 <div class="dropdown-menu" aria-labelledby="tiendasDropdown">
-                    <a class="dropdown-item" href="/administrador/product_index.php">Lista de Productos</a>
+                    <a class="dropdown-item" href="productlist.php">Lista de Productos</a>
                 </div>
             </li>
             <li class="nav-item dropdown">

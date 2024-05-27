@@ -4,11 +4,6 @@
    $clave = "Node_2023";
    $bd = "appopular";
 
-/*$servername = "localhost";
-$username = "node";
-$password = "Node_2023";
-$dbname = "appopular";*/
-
 /*$host = "localhost";
 $user = "root";
 $clave = "root";
