@@ -1,14 +1,13 @@
 <?php
-// Datos de conexión a la base de datos
-/*$servername = "localhost";
+$servername = "localhost";
 $username = "node";
 $password = "Node_2023";
-$dbname = "appopular";*/
+$dbname = "appopular";
 
-$servername = "localhost";
+/*$servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "appopu2023";
+$dbname = "appopu2023";*/
 
 
 // Crear conexión
