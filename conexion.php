@@ -1,13 +1,13 @@
 <?php
-   $host = "localhost";
+   /*$host = "localhost";
    $user = "node";
    $clave = "Node_2023";
-   $bd = "appopular";
+   $bd = "appopular";*/
 
-/*$host = "localhost";
+$host = "localhost";
 $user = "root";
 $clave = "root";
-$bd = "appopu2023";*/
+$bd = "appopu2023";
    $conexion = mysqli_connect($host,$user,$clave,$bd);
    
     if (mysqli_connect_errno()){

@@ -1,14 +1,14 @@
 <?php
 // Datos de conexión a la base de datos
-$servername = "localhost";
+/*$servername = "localhost";
 $username = "node";
 $password = "Node_2023";
-$dbname = "appopular";
+$dbname = "appopular";*/
 
-/*$servername = "localhost";
+$servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "appopu2023";*/
+$dbname = "appopu2023";
 
 
 // Crear conexión
@@ -104,7 +104,7 @@ $conn->close();
 
 
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="/administrador/promocion.php">Inicio</a>
+    <a class="navbar-brand" href="promocion.php">Inicio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

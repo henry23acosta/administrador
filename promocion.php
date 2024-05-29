@@ -1,13 +1,13 @@
 <?php
-$servername = "localhost";
+/*$servername = "localhost";
 $username = "node";
 $password = "Node_2023";
-$dbname = "appopular";
+$dbname = "appopular";*/
 
-/*$servername = "localhost";
+$servername = "localhost";
 $username = "root";
 $password = "root";
-$dbname = "appopu2023";*/
+$dbname = "appopu2023";
 
 
 $conn = new mysqli($servername, $username, $password, $dbname);
@@ -83,56 +83,25 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .title-bar {
-            background-color: black;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .navbar {
-            background-color: #333;
-        }
-        .navbar-nav .nav-link {
-            color: white !important;
-        }
-        .carousel-item img {
-            width: 100px;
-            height: 400px;
-        }
-        .product-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
-            text-align: center;
-        }
-        .product-card img {
-            width: 100%;
-            height: auto;
-        }
-        .social-links a {
-            margin: 0 10px;
-            color: #333;
-            font-size: 1.5em;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/promo.css">
 </head>
 <body>
 
 <div class="title-bar">
-    <h1> Centro Comercial Popular de Tulcán</h1>
+    <h1>Centro Comercial Popular de Tulcán</h1>
+    <div class="logo">
+        <img src="./assets/img/logopopu.jpg" alt="Logo" height="50">
+    </div>
 </div>
+<div></div>
 
-
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="/administrador/promocion.php">Inicio</a>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="promocion.php">Inicio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
-        
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="tiendasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Tiendas
@@ -142,10 +111,10 @@ $conn->close();
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="tiendasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="aplicacionDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Aplicación
                 </a>
-                <div class="dropdown-menu" aria-labelledby="tiendasDropdown">
+                <div class="dropdown-menu" aria-labelledby="aplicacionDropdown">
                     <a class="dropdown-item" href="#">Descargar</a>
                     <a class="dropdown-item" href="#">Administrador</a>
                 </div>
@@ -154,13 +123,12 @@ $conn->close();
                 <a class="nav-link" href="#">Contacto</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
+        <form class="form-inline my-2 my-lg-0" method="GET" action="promocion.php">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" name="query">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
         </form>
     </div>
 </nav>
-
 
 <div class="container mt-5">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -190,8 +158,6 @@ $conn->close();
         </a>
     </div>
 
-
-
     <div class="container mt-5">
         <h2>Productos Más Vendidos</h2>
         <div class="row">
@@ -219,11 +185,52 @@ $conn->close();
             <?php endif; ?>
         </div>
     </div>
+    <!-- Recursos adicionales -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-3 text-center">
+            <div class="resource-card">
+                <div class="icon">
+                    <img src="./assets/img/noticias.png" alt="Noticias">
+                </div>
+                <h4>Noticias</h4>
+                <p>Actualidades de los mercados de Tulcan e información de la gestión que realiza el Presidente del Centro Comercial Popular.</p>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="resource-card">
+                <div class="icon">
+                    <img src="./assets/img/megafono.png" alt="Convocatorias y requerimientos">
+                </div>
+                <h4>Convocatorias y requerimientos</h4>
+                <p>Convocatorias, requerimientos, proformas y más solicitudes para la gestión del comercio del C.C.P.</p>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="resource-card">
+                <div class="icon">
+                    <img src="./assets/img/analitica.png" alt="Mercados de Quito">
+                </div>
+                <h4>Mercados de Tulcán</h4>
+                <p>Historia, descripción, ubicación y productos que expende cada uno de los mercados, ferias y plataformas.</p>
+            </div>
+        </div>
+        <div class="col-md-3 text-center">
+            <div class="resource-card">
+                <div class="icon">
+                    <img src="./assets/img/centro-comercial.png" alt="Centros Comerciales del Ahorro">
+                </div>
+                <h4>Centros Comerciales del Ahorro</h4>
+                <p>Descripción, ubicación y productos que expende cada uno de estos Centros de Comercio.</p>
+            </div>
+        </div>
+    </div>
+</div>
 
-    
-
-
-    
+<!-- Botón de volver arriba -->
+<button id="backToTopBtn" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+</button>
 
     <div class="mt-5 text-center">
         <h2>Síguenos en nuestras redes sociales</h2>
@@ -236,16 +243,138 @@ $conn->close();
     </div>
 </div>
 
+<footer class="footer">
+<div class="container">
+        <div class="contact-info">
+            <div class="separator"></div>
+            <div>Sobre Nosotros</div>
+            <div>Centro Comercial Popular<br>R77P+W94, Chimborazo, Tulcán</div>
+            <div>-----</div>
+            <div>Email</div>
+            <div>popularcentrocomercial@gmail.com</div>
+            <div>-----</div>
+            <div></div>
+            <div>Servicio al cliente: 0989964823<br>Telefono: 062981290</div>
+            <div class="separator"></div>
+        </div>
+        
+        <div class="column"> </div>
+        <div class="column"></div>
+        <div class="column"> </div>
+        <div class="column"></div>
+        <div class="payment-methods">
+        <div>Medios de Pagos Aceptados</div>
+            <img src="./assets/img/visa.png" alt="Visa">
+            <img src="./assets/img/dinnersclub.png" alt="Diners Club">
+            <img src="./assets/img/mastercad.png" alt="MasterCard">
+            <img src="./assets/img/bancopichincha.png" alt="Banco Pichincha">
+            <img src="./assets/img/american.png" alt="American Express">
+            <img src="./assets/img/discover.png" alt="Discover">
+            <img src="./assets/img/policianacional.png" alt="Policía Nacional">
+            <img src="./assets/img/produbanco.png" alt="Davivienda">
+            <img src="./assets/img/pacificard.png" alt="Bancolombia">
+            <img src="./assets/img/latampass.png" alt="Banco de Bogotá">
+        </div>
+       
+        <div class="column">
+        <div class="separator"></div>
+            <h4>Nuestra Compañía</h4>
+            <div class="separator"></div>
+            <ul>
+                <li><a href="#">Quiénes somos</a></li>
+                <li><a href="#">Nuestra tienda</a></li>
+                <li><a href="#">Nuestras marcas</a></li>
+                <li><a href="#">Contáctenos</a></li>
+                <li><a href="#">Trabaja con nosotros</a></li>
+                <li><a href="#">Tarjeta de crédito</a></li>
+                <li><a href="#">Certificados tributarios</a></li>
+                <li><a href="#">Rifas</a></li>
+                <li><a href="#">Fondo de comerciantes y cooperativas</a></li>
+            </ul>
+        </div>
+        <div class="separator"></div>
+
+        <div class="column">
+        <div class="separator"></div>
+            <h4>Compras en línea</h4>
+            <div class="separator"></div>
+            <ul>
+                <li><a href="#">Preguntas frecuentes</a></li>
+                <li><a href="#">Pago seguro</a></li>
+                <li><a href="#">Métodos de envío</a></li>
+                <li><a href="#">Medios de pago</a></li>
+                <li><a href="#">Seguros</a></li>
+            </ul>
+        </div>
+        <div class="separator"></div>
+
+        <div class="column">
+        <div class="separator"></div>
+            <h4>Servicios</h4>
+            <div class="separator"></div>
+            <ul>
+                <li><a href="#">Instalaciones</a></li>
+                <li><a href="#">Agendar servicio de instalación</a></li>
+                <li><a href="#">Garantía extendida</a></li>
+                <li><a href="#">Garantías y centros de servicios técnico</a></li>
+                <li><a href="#">Instalación de App</a></li>
+                <li><a href="#">Consulta tus facturas</a></li>
+            </ul>
+        </div>
+        <div>
+        <div></div>
+        </div>
+
+        <div class="column">
+        <div class="separator"></div>
+            <h4>Políticas</h4>
+            <div class="separator"></div>
+            <ul>
+                <li><a href="#">Términos y condiciones del canal digital</a></li>
+                <li><a href="#">Contrato de compraventa en línea</a></li>
+                <li><a href="#">Política de privacidad</a></li>
+                <li><a href="#">Solicitud de Informes</a></li>
+                <li><a href="#">Política de cookies</a></li>
+                <li><a href="#">Política de cambios y devoluciones</a></li>
+                <li><a href="#">Código de ética</a></li>
+                <li><a href="#">Manual de normas SRI para Terceros</a></li>
+                <li><a href="#">Todo lo que debes saber</a></li>
+                <li><a href="#">Línea ética</a></li>
+            </ul>
+        </div>
+    </div>
+
+    
+</footer>
+
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
+// Mostrar el botón cuando el usuario hace scroll hacia abajo 20px
+window.onscroll = function() {
+        scrollFunction();
+    };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("backToTopBtn").style.display = "block";
+        } else {
+            document.getElementById("backToTopBtn").style.display = "none";
+        }
+    }
+
+    // Cuando el usuario hace clic en el botón, vuelve hacia arriba
+    document.getElementById("backToTopBtn").addEventListener("click", function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
     $(document).ready(function(){
         $('#carouselExampleIndicators').carousel({
             interval: 2000
         });
-    });
+    });    
 </script>
 </body>
 </html>
