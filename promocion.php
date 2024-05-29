@@ -88,12 +88,15 @@ $conn->close();
 <body>
 
 <div class="title-bar">
-    <h1>Centro Comercial Popular de Tulcán</h1>
-    <div class="logo">
-        <img src="./assets/img/logopopu.jpg" alt="Logo" height="50">
-    </div>
+    <a href="#" class="title-link">
+        <h1>Centro Comercial Popular de Tulcán</h1>
+    </a>
+    <a href="#" class="logo-link">
+        <div class="logo">
+            <img src="./assets/img/logopopu.jpg" alt="Logo">
+        </div>
+    </a>
 </div>
-<div></div>
 
 <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="promocion.php">Inicio</a>
@@ -115,12 +118,15 @@ $conn->close();
                     Aplicación
                 </a>
                 <div class="dropdown-menu" aria-labelledby="aplicacionDropdown">
-                    <a class="dropdown-item" href="#">Descargar</a>
-                    <a class="dropdown-item" href="#">Administrador</a>
+                    <a class="dropdown-item" href="https://drive.google.com/file/d/1R3WZcOpLaK34rW9_WhEQnSmQX__PPDq_/view?usp=sharing">Descargar</a>
+                    <a class="dropdown-item" href="index.php">Administrador</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contacto</a>
+                <a class="nav-link" href="#sobreNosotros">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#historia">Novedad</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" method="GET" action="promocion.php">
@@ -130,7 +136,8 @@ $conn->close();
     </div>
 </nav>
 
-<div class="container mt-5">
+
+<div class="container mt-5 carousel-container">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <?php if (isset($images) && is_array($images) && count($images) > 0): ?>
@@ -156,7 +163,13 @@ $conn->close();
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill"></div>
+        </div>
     </div>
+</div>
+
+
 
     <div class="container mt-5">
         <h2>Productos Más Vendidos</h2>
@@ -185,6 +198,20 @@ $conn->close();
             <?php endif; ?>
         </div>
     </div>
+    
+    <div id="historia" class="history-section mt-5">
+        <h2>Novedades</h2>
+        <p>
+            El Centro Comercial Popular en Tulcán, es un lugar en el cual se puede encontrar todo tipo de mercadería como: camisas, camisetas, chaquetas, zapatos, pantalones, medias, ropa interior, además de ropa de cama como cobijas, fundas de almohada y sábanas, ropa para niños y adultos, a muy buenos precios al por mayor y al detal.
+        </p>
+        <div class="history-image text-center">
+            <img src="./assets/img/line1.jpg" alt="Centro Comercial Popular" class="img-fluid">
+            <img src="./assets/img/line2.jpg" alt="Centro Comercial Popular" class="img-fluid">
+            <img src="./assets/img/line 3.jpg" alt="Centro Comercial Popular" class="img-fluid">
+        </div>
+    </div>
+</div>
+
     <!-- Recursos adicionales -->
 <div class="container mt-5">
     <div class="row">
@@ -227,6 +254,14 @@ $conn->close();
     </div>
 </div>
 
+<div>
+<div class="locate-us text-center mt-5">
+        <a href="https://www.google.com/maps/place/Centro+Comercial+Popular/@0.8147552,-77.7166297,17z/data=!3m1!4b1!4m6!3m5!1s0x8e2968cc29cbaebf:0x44cc88a68640f092!8m2!3d0.8147552!4d-77.7140548!16s%2Fg%2F11gz_gwwz?entry=ttu" target="_blank" class="location-link">
+            <i class="fas fa-map-marker-alt"></i> Ubícanos
+        </a>
+    </div>
+ </div>
+
 <!-- Botón de volver arriba -->
 <button id="backToTopBtn" title="Go to top">
     <i class="fas fa-arrow-up"></i>
@@ -245,6 +280,7 @@ $conn->close();
 
 <footer class="footer">
 <div class="container">
+        <div id="sobreNosotros"></div>
         <div class="contact-info">
             <div class="separator"></div>
             <div>Sobre Nosotros</div>
@@ -374,7 +410,83 @@ window.onscroll = function() {
         $('#carouselExampleIndicators').carousel({
             interval: 2000
         });
-    });    
+    });
+
+    document.querySelector('.title-link').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    });
+
+    document.querySelector('.title-link h1').addEventListener('mousedown', function() {
+        this.style.color = 'fuchsia';
+    });
+
+    document.querySelector('.title-link h1').addEventListener('mouseup', function() {
+        setTimeout(() => {
+            this.style.color = 'white';
+        }, 500); // Change back to original color after 500ms
+    });
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const carousel = document.querySelector('#carouselExampleIndicators');
+    const carouselInstance = new bootstrap.Carousel(carousel, {
+        interval: 5000, // 5 segundos
+        pause: false,
+        ride: 'carousel'
+    });
+
+    carousel.addEventListener('mouseenter', () => {
+        carouselInstance.pause();
+        resetProgressBar();
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+        carouselInstance.cycle();
+        startProgressBar();
+    });
+
+    let intervalId;
+
+    function startProgressBar() {
+        const progressBarFill = document.querySelector('.progress-bar-fill');
+        progressBarFill.style.width = '0%';
+
+        setTimeout(() => {
+            progressBarFill.style.width = '100%';
+        }, 100); // Pequeño retraso para iniciar la animación
+    }
+
+    function resetProgressBar() {
+        clearInterval(intervalId);
+        const progressBarFill = document.querySelector('.progress-bar-fill');
+        if (progressBarFill) {
+            progressBarFill.style.width = '0%';
+        }
+    }
+
+    carousel.addEventListener('slid.bs.carousel', (event) => {
+        resetProgressBar();
+        startProgressBar();
+    });
+
+    // Iniciar la barra de progreso al cargar la página
+    startProgressBar();
+});
+
+
+
+
+
 </script>
 </body>
 </html>

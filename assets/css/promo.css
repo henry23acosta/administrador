@@ -1,7 +1,10 @@
+html {
+    scroll-behavior: smooth;
+}
 body {
     font-family: Arial, sans-serif;
     }
-.title-bar {
+    .title-bar {
     background-color: black;
     color: white;
     padding: 10px 0;
@@ -20,17 +23,48 @@ body {
     margin: 0;
     flex: 1;
     text-align: left;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
 }
 
+.title-link,
+.logo-link {
+    text-decoration: none; 
+    color: inherit;        
+}
+
+.title-link h1 {
+    color: white; 
+    outline: none; 
+}
+
+.title-link h1:focus {
+    outline: none; 
+}
+
+.title-link h1:hover {
+    background-color: #333;
+}
+
+.title-link h1:active {
+    transform: translateY(-10px); 
+    background-color: #4a4aca;    /* Change background color on click */
+}
+
+.title-link h1:focus {
+    outline: none; 
+}
+    
+  
 .title-bar .logo {
     margin-left: auto;
-    height: 60px; /* Ajusta la altura según tus necesidades */
-    width: 100px;  /* Ajusta el ancho automáticamente para mantener la proporción */
+    height: 60px; 
+    width: 100px; 
 }
 
 .title-bar .logo img {
-    height: 100%; /* Asegura que la imagen ocupe toda la altura del contenedor */
-    width: auto;  /* Mantiene la proporción de la imagen */
+    height: 100%; 
+    width: auto;  
 }
 
 .navbar {
@@ -71,11 +105,179 @@ body {
         font-size: 14px;
     }
 }
-        .carousel-item img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
+
+.carousel-container {
+    max-width: 950px; /* Ancho máximo del carrusel */
+    margin: 0 auto; /* Centrar el carrusel horizontalmente */
+    position: relative;
+}
+
+/* Ajuste del tamaño de las imágenes del carrusel */
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    max-height: 500px; /* Altura máxima del carrusel */
+    object-fit: cover;
+}
+
+/* Asegurar transiciones suaves */
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+    backface-visibility: hidden; /* Asegura que las imágenes no muestren líneas durante la transición */
+    perspective: 1000px; /* Agrega una perspectiva para mejorar la transición */
+}
+/* Desactiva temporalmente el anti-aliasing durante la transición */
+@keyframes disable-antialiasing {
+    from {
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    to {
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+}
+
+.carousel-item {
+    animation: disable-antialiasing 0.6s;
+}
+
+/* Optional: Ensure smooth transitions */
+.carousel-inner {
+    display: flex;
+    align-items: center;
+}
+
+.carousel-inner img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+.progress-bar-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px; /* Altura de la barra de progreso */
+    background-color: rgba(0, 0, 0, 0.2); /* Color de fondo de la barra de progreso */
+}
+
+.progress-bar-fill {
+    width: 0;
+    height: 100%;
+    background-color: white; /* Color de llenado de la barra de progreso */
+    transition: width 5s linear; /* Animación suave por 5 segundos */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-control-prev-icon:after,
+.carousel-control-next-icon:after {
+    font-size: 30px;
+    color: white; /* Color de la flecha */
+    content: '';
+    display: inline-block;
+}
+
+.carousel-control-prev-icon:after {
+    content: '<';
+}
+
+.carousel-control-next-icon:after {
+    content: '>';
+}
+
+
+
+        
+
+        .history-section {
+            background-color: #f8f9fa; /* Soft background color */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, background-color 0.3s;
+            position: relative;
+            margin-top: 20px;
         }
+        
+        .history-section h2 {
+            color: #333; /* Title color */
+            margin-bottom: 15px;
+        }
+        
+        .history-section p {
+            color: #666; /* Paragraph color */
+            line-height: 2.6;
+        }
+        
+        .history-image img {
+            max-width: 60%; 
+            height: auto;
+            border-radius: 15px;
+            margin-top: 25px;
+            transition: transform 0.3s;
+        }
+        
+        
+        .history-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .history-section:active {
+            background-color: #ececec;
+        }
+
+        .locate-us {
+            margin-top: 30px;
+        }
+        
+        .location-link {
+            font-size: 20px; /* Increased font size */
+            color: #4285F4; /* Google Maps blue */
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .location-link i {
+            margin-right: 15px;
+            font-size: 50px; /* Increased icon size */
+            color: #34A853; /* Google Maps green */
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        
+        .location-link:hover {
+            color: #0F9D58; /* Darker green on hover */
+        }
+        
+        .location-link:active {
+            transform: scale(1.1); /* Slightly larger on click */
+            color: #EA4335; /* Google Maps red */
+        }
+        
+        .location-link:active i {
+            color: #EA4335; /* Google Maps red for icon */
+        }
+        
         .product-card {
             border: 1px solid #ddd;
             border-radius: 5px;

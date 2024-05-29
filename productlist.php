@@ -59,84 +59,59 @@ $conn->close();
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .title-bar {
-            background-color: black;
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
-        .navbar {
-            background-color: #333;
-        }
-        .navbar-nav .nav-link {
-            color: white !important;
-        }
-        .carousel-item img {
-            width: 100px;
-            height: 400px;
-        }
-        .product-card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            margin: 10px;
-            text-align: center;
-        }
-        .product-card img {
-            width: 100%;
-            height: auto;
-        }
-        .social-links a {
-            margin: 0 10px;
-            color: #333;
-            font-size: 1.5em;
-        }
-    </style> 
+    <link rel="stylesheet" href="assets/css/promo.css">
 </head>
 
 
-<body>
 <div class="title-bar">
-    <h1> Centro Comercial Popular de Tulcán</h1>
+    <a href="#" class="title-link">
+        <h1>Centro Comercial Popular de Tulcán</h1>
+    </a>
+    <a href="#" class="logo-link">
+        <div class="logo">
+            <img src="./assets/img/logopopu.jpg" alt="Logo">
+        </div>
+    </a>
 </div>
 
-
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="promocion.php">Inicio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
-        
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="tiendasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Tiendas
                 </a>
                 <div class="dropdown-menu" aria-labelledby="tiendasDropdown">
-                    <a class="dropdown-item" href="/administrador/product_index.php">Lista de Productos</a>
+                    <a class="dropdown-item" href="productlist.php">Lista de Productos</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="tiendasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="aplicacionDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Aplicación
                 </a>
-                <div class="dropdown-menu" aria-labelledby="tiendasDropdown">
-                    <a class="dropdown-item" href="#">Descargar</a>
-                    <a class="dropdown-item" href="#">Administrador</a>
+                <div class="dropdown-menu" aria-labelledby="aplicacionDropdown">
+                    <a class="dropdown-item" href="https://drive.google.com/file/d/1R3WZcOpLaK34rW9_WhEQnSmQX__PPDq_/view?usp=sharing">Descargar</a>
+                    <a class="dropdown-item" href="index.php">Administrador</a>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contacto</a>
+                <a class="nav-link" href="#sobreNosotros">Contacto</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#historia">Novedad</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
+        <form class="form-inline my-2 my-lg-0" method="GET" action="promocion.php">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar" name="query">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
         </form>
     </div>
 </nav>
+
 
     <div class="container mt-5">
         <h1>Lista de Productos</h1>
