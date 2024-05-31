@@ -8,7 +8,7 @@ $password = "Node_2023";
 $dbname = "appopular";
 
 /*$servername = "localhost";
-$username = "root";
+$username = "node";
 $password = "root";
 $dbname = "appopu2023";*/
 
@@ -27,9 +27,8 @@ try {
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
-            // Convertir los datos BLOB a base64
             $image_data = base64_encode($row['imagenes']);
-            $image_src = 'data:image/jpeg;base64,' . $image_data; // Suponiendo que sean imágenes JPEG
+            $image_src = 'data:image/jpeg;base64,' . $image_data;
             $images[] = $image_src;
         }
     } else {
@@ -38,6 +37,7 @@ try {
 } catch (mysqli_sql_exception $e) {
     echo "Error en la consulta: " . $e->getMessage();
 }
+
 $sql = "
     SELECT 
         p.idProductos, 
@@ -63,7 +63,6 @@ $sql = "
 ";
 $result = $conn->query($sql);
 
-// Organizar los resultados en un array
 $productos = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -72,10 +71,18 @@ if ($result->num_rows > 0) {
         $productos[$row['idProductos']]['talla'] = $row['talla'];
         $productos[$row['idProductos']]['stock'] = $row['stock'];
         $productos[$row['idProductos']]['total_ventas'] = $row['total_ventas'];
-        // Separar las URLs concatenadas en un array
         $productos[$row['idProductos']]['imagenes'] = explode(',', $row['urlimg']);
+
+        // Prepend 'http://localhost:3000' to each image URL
+        //https://www.appopular.me${r[0].urlimg}
+        foreach ($productos[$row['idProductos']]['imagenes'] as &$url) {
+            $url = 'https://www.appopular.me${r[0].urlimg}' . $url;
+        }
     }
 }
+
+
+
 
 $conn->close();
 ?>
@@ -87,7 +94,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/promo.css">
-    <link rel="stylesheet" href="/path/to/fontawesome/css/all.min.css">
+    
 </head>
 <body>
 
@@ -111,7 +118,7 @@ $conn->close();
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="tiendasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tiendas
+                    Productos
                 </a>
                 <div class="dropdown-menu" aria-labelledby="tiendasDropdown">
                     <a class="dropdown-item" href="productlist.php">Lista de Productos</a>

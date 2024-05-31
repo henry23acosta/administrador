@@ -5,7 +5,7 @@ $password = "Node_2023";
 $dbname = "appopular";
 
 /*$servername = "localhost";
-$username = "root";
+$username = "node";
 $password = "root";
 $dbname = "appopu2023";*/
 
@@ -13,32 +13,26 @@ $dbname = "appopu2023";*/
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verificar conexión
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Número de productos por página
 $productos_por_pagina = 10;
 
-// Obtener el número de la página actual
 if (isset($_GET['page']) && is_numeric($_GET['page'])) {
     $pagina_actual = (int) $_GET['page'];
 } else {
     $pagina_actual = 1;
 }
 
-// Calcular el desplazamiento para la consulta SQL
 $offset = ($pagina_actual - 1) * $productos_por_pagina;
 
-// Obtener el total de productos para calcular el número total de páginas
 $sql_total = "SELECT COUNT(*) as total FROM productos";
 $result_total = $conn->query($sql_total);
 $row_total = $result_total->fetch_assoc();
 $total_productos = $row_total['total'];
 $total_paginas = ceil($total_productos / $productos_por_pagina);
 
-// Realizar la consulta SQL para obtener los productos de la página actual
 $sql = "
     SELECT p.idProductos, p.nombre, p.costo, p.talla, p.stock, i.urlimg
     FROM productos p
@@ -49,7 +43,6 @@ $sql = "
 ";
 $result = $conn->query($sql);
 
-// Cerrar la conexión a la base de datos
 $conn->close();
 ?>
 
@@ -57,12 +50,11 @@ $conn->close();
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/promo.css">
-    <link rel="stylesheet" href="/path/to/fontawesome/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/promo.css">
 </head>
-
+<body>
 
 <div class="title-bar">
     <a href="#" class="title-link">
@@ -113,28 +105,27 @@ $conn->close();
     </div>
 </nav>
 
-
-    <div class="container mt-5">
-        <h1>Lista de Productos</h1>
-        <div class="row">
-            <?php if (!empty($result) && $result->num_rows > 0): ?>
-                <?php while($row = $result->fetch_assoc()): ?>
-                    <div class="col-md-4">
-                        <div class="product-card">
-                            <?php if (!empty($row['urlimg'])): ?>
-                                <img src="<?php echo htmlspecialchars($row['urlimg']); ?>" alt="<?php echo htmlspecialchars($row['nombre']); ?>">
-                            <?php endif; ?>
-                            <h5><?php echo htmlspecialchars($row['nombre']); ?></h5>
-                            <p>Costo: <?php echo htmlspecialchars($row['costo']); ?></p>
-                            <p>Talla: <?php echo htmlspecialchars($row['talla']); ?></p>
-                            <p>Stock: <?php echo htmlspecialchars($row['stock']); ?></p>
-                        </div>
+<div class="container mt-5">
+    <h1>Lista de Productos</h1>
+    <div class="row">
+        <?php if (!empty($result) && $result->num_rows > 0): ?>
+            <?php while($row = $result->fetch_assoc()): ?>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <?php if (!empty($row['urlimg'])): ?>
+                            <img src="<?php echo 'https://www.appopular.me${r[0].urlimg}' . htmlspecialchars($row['urlimg']); ?>" alt="<?php echo htmlspecialchars($row['nombre']); ?>">
+                        <?php endif; ?>
+                        <h5><?php echo htmlspecialchars($row['nombre']); ?></h5>
+                        <p>Costo: <?php echo htmlspecialchars($row['costo']); ?></p>
+                        <p>Talla: <?php echo htmlspecialchars($row['talla']); ?></p>
+                        <p>Stock: <?php echo htmlspecialchars($row['stock']); ?></p>
                     </div>
-                <?php endwhile; ?>
-            <?php else: ?>
-                <p>No se encontraron productos.</p>
-            <?php endif; ?>
-        </div>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>No se encontraron productos.</p>
+        <?php endif; ?>
+    </div>
         
         <!-- Enlaces de paginación -->
         <nav aria-label="Page navigation example">
