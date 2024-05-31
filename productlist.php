@@ -113,7 +113,7 @@ $conn->close();
                 <div class="col-md-4">
                     <div class="product-card">
                         <?php if (!empty($row['urlimg'])): ?>
-                            <img src="<?php echo 'https://www.appopular.me${r[0].urlimg}' . htmlspecialchars($row['urlimg']); ?>" alt="<?php echo htmlspecialchars($row['nombre']); ?>">
+                            <img src="<?php echo 'https://www.appopular.me' . htmlspecialchars($row['urlimg']); ?>" alt="<?php echo htmlspecialchars($row['nombre']); ?>">
                         <?php endif; ?>
                         <h5><?php echo htmlspecialchars($row['nombre']); ?></h5>
                         <p>Costo: <?php echo htmlspecialchars($row['costo']); ?></p>
@@ -126,7 +126,7 @@ $conn->close();
             <p>No se encontraron productos.</p>
         <?php endif; ?>
     </div>
-        
+  
         <!-- Enlaces de paginación -->
         <nav aria-label="Page navigation example">
             <ul class="pagination">

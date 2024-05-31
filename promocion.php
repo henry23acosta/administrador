@@ -15,6 +15,7 @@ $dbname = "appopu2023";*/
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
@@ -73,14 +74,12 @@ if ($result->num_rows > 0) {
         $productos[$row['idProductos']]['total_ventas'] = $row['total_ventas'];
         $productos[$row['idProductos']]['imagenes'] = explode(',', $row['urlimg']);
 
-        // Prepend 'http://localhost:3000' to each image URL
-        //https://www.appopular.me${r[0].urlimg}
+        // Prepend the URL base to each image URL
         foreach ($productos[$row['idProductos']]['imagenes'] as &$url) {
-            $url = 'https://www.appopular.me${r[0].urlimg}' . $url;
+            $url = 'https://www.appopular.me' . $url;
         }
     }
 }
-
 
 
 
@@ -181,34 +180,36 @@ $conn->close();
 </div>
 
 
-
-    <div class="container mt-5">
-        <h2>Productos Más Vendidos</h2>
-        <div class="row">
-            <?php if (!empty($productos)): ?>
-                <?php foreach ($productos as $idProducto => $producto): ?>
-                    <div class="col-md-4">
-                        <div class="product-card">
-                            <?php if (!empty($producto['imagenes'])): ?>
-                                <?php foreach ($producto['imagenes'] as $imagen): ?>
-                                    <img src="<?php echo htmlspecialchars($imagen); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
-                                    <!-- Mostramos solo la primera imagen -->
-                                    <?php break; ?>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-                            <h5><?php echo htmlspecialchars($producto['nombre']); ?></h5>
-                            <p>Costo: <?php echo htmlspecialchars($producto['costo']); ?></p>
-                            <p>Talla: <?php echo htmlspecialchars($producto['talla']); ?></p>
-                            <p>Stock: <?php echo htmlspecialchars($producto['stock']); ?></p>
-                            <p>Total Ventas: <?php echo htmlspecialchars($producto['total_ventas']); ?></p>
+<div class="container mt-5">
+    <h2>Productos Más Vendidos</h2>
+    <div class="row">
+        <?php if (!empty($productos)): ?>
+            <?php foreach ($productos as $idProducto => $producto): ?>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <?php if (!empty($producto['imagenes'])): ?>
+                            <?php foreach ($producto['imagenes'] as $imagen): ?>
+                                <img src="<?php echo htmlspecialchars($imagen); ?>" class="card-img-top" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                                <!-- Mostramos solo la primera imagen -->
+                                <?php break; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo htmlspecialchars($producto['nombre']); ?></h5>
+                            <p class="card-text">Costo: <?php echo htmlspecialchars($producto['costo']); ?></p>
+                            <p class="card-text">Talla: <?php echo htmlspecialchars($producto['talla']); ?></p>
+                            <p class="card-text">Stock: <?php echo htmlspecialchars($producto['stock']); ?></p>
+                            <p class="card-text">Total Ventas: <?php echo htmlspecialchars($producto['total_ventas']); ?></p>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>No se encontraron productos.</p>
-            <?php endif; ?>
-        </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No se encontraron productos.</p>
+        <?php endif; ?>
     </div>
+</div>
+
     
     <div id="historia" class="history-section mt-5">
         <h2>Novedades</h2>
