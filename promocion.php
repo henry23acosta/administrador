@@ -1,4 +1,7 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 $servername = "localhost";
 $username = "node";
 $password = "Node_2023";
@@ -84,6 +87,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/promo.css">
+    <link rel="stylesheet" href="/path/to/fontawesome/css/all.min.css">
 </head>
 <body>
 
@@ -386,7 +390,6 @@ $conn->close();
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <script>
 // Mostrar el botón cuando el usuario hace scroll hacia abajo 20px
 window.onscroll = function() {
