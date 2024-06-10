@@ -136,7 +136,16 @@ $conn->close();
                 <a class="nav-link" href="#sobreNosotros">Contacto</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#historia">Novedad</a>
+                <a class="nav-link" href="#historia">Sobre Nosotros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#novedad">Novedades</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="fortalecer.php">Fortalezas</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#plazoleta">Plazoletas</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" method="GET" action="promocion.php">
@@ -212,9 +221,11 @@ $conn->close();
 
     
     <div id="historia" class="history-section mt-5">
-        <h2>Novedades</h2>
+        <h2>Sobre Nosotros</h2>
         <p>
-            El Centro Comercial Popular en Tulcán, es un lugar en el cual se puede encontrar todo tipo de mercadería como: camisas, camisetas, chaquetas, zapatos, pantalones, medias, ropa interior, además de ropa de cama como cobijas, fundas de almohada y sábanas, ropa para niños y adultos, a muy buenos precios al por mayor y al detal.
+            El Centro Comercial Popular en Tulcán, es un lugar en el cual se puede encontrar todo tipo de mercadería como: camisas, camisetas, chaquetas, 
+            zapatos, pantalones, medias, ropa interior, además de ropa de cama como cobijas, fundas de almohada y sábanas, ropa para niños y adultos, 
+            a muy buenos precios al por mayor y al detal.
         </p>
         <div class="history-image text-center">
             <img src="./assets/img/line1.jpg" alt="Centro Comercial Popular" class="img-fluid">
@@ -222,10 +233,36 @@ $conn->close();
             <img src="./assets/img/line 3.jpg" alt="Centro Comercial Popular" class="img-fluid">
         </div>
     </div>
+    <div id="plazoleta" class="history-section mt-5">
+        <h2>PLazoletas</h2>
+        <p>
+        ESTA DISTRIBUIDO EN LAS DIFERENTES PLAZOLETAS 
+        <p>
+        Donde se puede encontrar:
+        <p>
+        Buenos precios, excelente atención, gran calidad en sus productos: ropa, zapatos, mochilas,
+        artesanías , bisutería, bordados, sastres, productos naturales, flores, bazar y mucho más!!....
+        <p>
+        Centro Comercial ubicado en el corazón de la ciudad de Tulcán.
+        </p>
+        </p>
+        <div class="history-image text-center">
+            <h2>Parte Principal</h2>
+            <img src="./assets/img/LOCALES PRINCIPAL.jpg" alt="Centro Comercial Popular" class="img-fluid">
+            <h2>PLazoleta Numero 1 - Chimborazo</h2>
+            <img src="./assets/img/LOCALES 2.jpeg" alt="Centro Comercial Popular" class="img-fluid">
+            <h2>PLazoleta Numero 2 - Zapatos</h2>
+            <img src="./assets/img/LOCALES 3.jpeg" alt="Centro Comercial Popular" class="img-fluid">
+            <h2>PLazoleta Numero 3 - Panama</h2>
+            <img src="./assets/img/LOCALES 4.jpg" alt="Centro Comercial Popular" class="img-fluid">
+            <h2>PLazoleta Numero 4 - Parte Baja Popular</h2>
+            <img src="./assets/img/LOCALES 5.jpg" alt="Centro Comercial Popular" class="img-fluid">
+        </div>
+    </div>
 </div>
 
     <!-- Recursos adicionales -->
-<div class="container mt-5">
+<div id="novedad" class="container mt-5">
     <div class="row">
         <div class="col-md-3 text-center">
             <div class="resource-card">
@@ -259,7 +296,7 @@ $conn->close();
                 <div class="icon">
                     <img src="./assets/img/centro-comercial.png" alt="Centros Comerciales del Ahorro">
                 </div>
-                <h4>Centros Comerciales del Ahorro</h4>
+                <h4>Centros Comercial del Ahorro</h4>
                 <p>Descripción, ubicación y productos que expende cada uno de estos Centros de Comercio.</p>
             </div>
         </div>
