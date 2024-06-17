@@ -93,7 +93,23 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/promo.css">
-    
+    <style>
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 ratio */
+            padding-top: 30px; 
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe,
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 
@@ -155,7 +171,6 @@ $conn->close();
     </div>
 </nav>
 
-
 <div class="container mt-5 carousel-container">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -188,7 +203,17 @@ $conn->close();
     </div>
 </div>
 
+<!-- Video Section -->
+<div class="container mt-5">
+    <div class="video-container">
+        <video controls autoplay muted>
+            <source src="./assets/img/Popularpro.mp4" type="video/mp4">
+            Tu navegador no soporta la etiqueta de video.
+        </video>
+    </div>
+</div>
 
+<!-- Productos Más Vendidos -->
 <div class="container mt-5">
     <h2>Productos Más Vendidos</h2>
     <div class="row">

@@ -122,10 +122,6 @@ $conn->close();
             </select>
         </div>
         <div>
-            <label for="nombre_compra">Productos a comprar:</label>
-            <input type="text" id="nombre_compra" name="nombre_compra" value="<?php echo isset($_GET['nombresProductos']) ? $_GET['nombresProductos'] : ''; ?>" readonly>
-        </div>
-        <div>
             <label for="total">TOTAL DE COMPRA:</label>
             <input type="text" id="total" name="total" value="<?php echo $_GET['total']; ?>" readonly>
         </div>
